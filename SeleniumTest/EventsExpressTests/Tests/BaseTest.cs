@@ -44,7 +44,7 @@ namespace SeleniumTest.EventsExpressTests.Tests
                 string testName = TestContext.CurrentContext.Test.Name;
                 GetScreen(testName);
             }
-            //driver.Close();
+            driver.Close();
         }
 
 
