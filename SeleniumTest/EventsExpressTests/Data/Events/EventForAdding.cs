@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections;
 using SeleniumTest.EventsExpressTests.Models;
 
 namespace SeleniumTest.EventsExpressTests.Data.Events
@@ -24,7 +19,7 @@ namespace SeleniumTest.EventsExpressTests.Data.Events
         private string email = "admin@gmail.com";
         private string password = "1qaz1qaz";
         private int eventOrder = 1;
-        private string photoPath = "‪Desktop\\example.jpg";
+        private string photoPath = "‪Desktop\\example.jpg";//path to photo, which you want to add
 
         public IEnumerator GetEnumerator()
         {

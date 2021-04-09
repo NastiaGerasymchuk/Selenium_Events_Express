@@ -1,15 +1,10 @@
 ﻿using SeleniumTest.EventsExpressTests.Enum;
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SeleniumTest.EventsExpressTests.Data.Events
 {
-    
-        public class EventsFilterCategory : IEnumerable
+
+    public class EventsFilterCategory : IEnumerable
         {
             private const int GolfCount = 1;
             private const int SeaCount = 1;
