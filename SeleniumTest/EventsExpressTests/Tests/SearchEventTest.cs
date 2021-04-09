@@ -1,5 +1,4 @@
 ﻿using NUnit.Framework;
-using OpenQA.Selenium;
 using SeleniumTest.EventsExpressTests.Data;
 using SeleniumTest.EventsExpressTests.Data.Events;
 using SeleniumTest.EventsExpressTests.Models;
@@ -23,7 +22,9 @@ namespace SeleniumTest.EventsExpressTests
         private const string Participants = "Participants";
         private const string EventText = "event";
         private const int MonthEventCount = 1;
-        
+        private string cartPathBegin = "#main > div.events-container > div > div:nth-child(";
+        private string cartPathEnd = ")";
+
 
 
 
@@ -72,10 +73,6 @@ namespace SeleniumTest.EventsExpressTests
         [Obsolete]
         public void Screen()
         {
-
-            //\Users\Admin\AppData\Local\Temp\tmpA6F.png
-
-
             HomeEvent homeEvent = GetHomeObject();
             var textKeyWord = homeEvent.GetInputKeyWord();
             Assert.That(homeEvent.GetEnabledBtnSearchState(), Is.False);
@@ -89,32 +86,8 @@ namespace SeleniumTest.EventsExpressTests
 
             Assert.That(homeEvent.GetEnabledBtnSearchState(), Is.False);
 
-            //homeEvent.ResetClick();
             textKeyWord = homeEvent.GetInputKeyWord();
-            /*Assert.That(homeEvent.GetEnabledBtnSearchState(), Is.False);
-            Assert.That(textKeyWord, Is.Empty);
-            Assert.That(homeEvent.DefaultState(), Is.False);*/
-           
-        }
-        //[TearDown]
-        //public void TearDown()
-        //{
-        //    string name = DateTime.Now.Millisecond.ToString();
-        //    GetScreen(name);
-        //}
-        private void GetScreen(string name)
-        {
-            //NUnit.Framework.TestContext.CurrentContext.Test.FullName;
-            string path = @"C:\Users\Admin\source\repos\SeleniumTest\Screen\";
-            //string path = @"c:\Users\Admin\Desktop\";
-            //string fileName = "Screen.png";
-            string fullPath = path + name;
-
-            var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
             
-            //Console.WriteLine(tempFilePath);
-            screenshot.SaveAsFile(fullPath, ScreenshotImageFormat.Png);
-
         }
         [Test]
         [Obsolete]
@@ -208,7 +181,7 @@ namespace SeleniumTest.EventsExpressTests
         public void AuthorDetails(Event myEvent, int eventOrder)
         {
             string author = myEvent.Author.Substring(0, 1);
-            string card = $"#main > div.events-container > div > div:nth-child({eventOrder})";
+            string card = $"{cartPathBegin}{eventOrder}{cartPathEnd}";
             HomeEvent homeEvent = GetHomeObject();
             
             EventCardPage eventCardPage = new EventCardPage(driver, card,eventOrder);
@@ -235,7 +208,7 @@ namespace SeleniumTest.EventsExpressTests
         {
             string protectionText= $"{myEvent.Protection.ToString("g")} {EventText}";
             string participants = $"{ myEvent.Participants}{Participants}";
-            string card = $"#main > div.events-container > div > div:nth-child({eventOrder})";
+            string card = $"{cartPathBegin}{eventOrder}{cartPathEnd}";
             HomeEvent homeEvent = GetHomeObject();
             EventCardPage eventCardPage = new EventCardPage(driver, card, eventOrder);
             Assert.That(eventCardPage.IsPhotoVisible, Is.True);
@@ -259,7 +232,7 @@ namespace SeleniumTest.EventsExpressTests
         [TestCase("admin@gmail.com","1qaz1qaz",1)]
         public void EventDetailsByClickingLock(string email,string password,int eventOrder)
         {
-            string card = $"#main > div.events-container > div > div:nth-child({eventOrder})";
+            string card = $"{cartPathBegin}{eventOrder}{cartPathEnd}";
             HomeEvent home = GetHomeObject();
             var registerPage = home.Registration();
             Assert.That(registerPage.GetType() == typeof(RegisterPage), Is.True);
@@ -279,7 +252,7 @@ namespace SeleniumTest.EventsExpressTests
             string author = myEvent.Author.Substring(0, 1);
             string protectionText = $"{myEvent.Protection.ToString("g")} {EventText}";
             string participants = $"{ myEvent.Participants}{Participants}";
-            string card = $"#main > div.events-container > div > div:nth-child({eventOrder})";
+            string card = $"{cartPathBegin}{eventOrder}{cartPathEnd}";
             HomeEvent homeEvent = GetHomeObject();
             EventCardPage eventCardPage = new EventCardPage(driver, card, eventOrder);
             Assert.That(eventCardPage.IsVisibleBtnEye, Is.True);
@@ -306,7 +279,7 @@ namespace SeleniumTest.EventsExpressTests
         {
             string author= myEvent.Author.Substring(0, 1);
             string participants = $"{ myEvent.Participants} {Participants}";
-            string card = $"#main > div.events-container > div > div:nth-child({eventOrder})";
+            string card = $"{cartPathBegin}{eventOrder}{cartPathEnd}";
 
             HomeEvent homeEvent = GetHomeObject();
             EventCardPage eventCardPage = new EventCardPage(driver, card,eventOrder);
@@ -335,7 +308,6 @@ namespace SeleniumTest.EventsExpressTests
 
             var resBeginPage = eventCardPage.GoToBeginPage();
 
-            //Assert.That(eventCardPage.IsVisibleBtnSocialSharig(), Is.True);
             var resSocialSharingClick = eventCardPage.SocialSharingClick();
             Assert.That(resSocialSharingClick.GetType() == typeof(SocialSharing), Is.True);
             Assert.That(resSocialSharingClick.GetSharingCount(), Is.EqualTo(SharingCount));
@@ -553,8 +525,6 @@ namespace SeleniumTest.EventsExpressTests
             startDateFrom = homeEvent.GetDateFrom();
             startDateTo = homeEvent.GetDateTo();
             startCategory = homeEvent.GetSelectElement();
-            //textKeyWord = homeEvent.GetInputKeyWord();
-            //Assert.That(textKeyWord, Is.Empty);
             Assert.That(startDateFrom, Is.EqualTo(stringToday));
             Assert.That(startDateTo, Is.EqualTo(stringToday));
             Assert.That(startCategory, Is.Empty);
@@ -678,7 +648,6 @@ namespace SeleniumTest.EventsExpressTests
         public override void TearDown()
         {
             base.TearDown();
-            //driver.Close();
         }
 
     }
