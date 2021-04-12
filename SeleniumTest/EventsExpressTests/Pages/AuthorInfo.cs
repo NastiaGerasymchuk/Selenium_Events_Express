@@ -1,7 +1,5 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Pages;
-using System;
 
 namespace SeleniumTest.EventsExpressTests
 {

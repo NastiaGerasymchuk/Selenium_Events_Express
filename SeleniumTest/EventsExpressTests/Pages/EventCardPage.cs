@@ -62,9 +62,7 @@ namespace SeleniumTest.EventsExpressTests
             category = Css(parentSelector + cssCategory);
             eyeBtn = Css(parentSelector + cssEyeBtn);
             socialSharingBtn = Css(parentSelector + cssCustomMenu);
-            //socialSharingBtn = By.XPath("/ html / body / div[1] / div[3] / div[2] / div / div[1] / div / div[5] / div / div[3] / div[2] / button");
-            lockBtn = Css(parentSelector + cssLock);
-            //lockBtn = By.XPath("/html/body/div[1]/div[3]/div[2]/div/div[1]/div/div[5]/div/div[3]/div[1]/button");
+            lockBtn = Css(parentSelector + cssLock);           
             
         }
         public void BtnLockClick()
@@ -176,7 +174,6 @@ namespace SeleniumTest.EventsExpressTests
         {
             try
             {
-                //wait.Until(ExpectedConditions.ElementIsVisible(by));
                 IWebElement webElement = driver.FindElement(by);
 
                 return webElement.Displayed;

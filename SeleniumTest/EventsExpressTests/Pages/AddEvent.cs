@@ -2,7 +2,6 @@
 using java.awt.datatransfer;
 using java.awt.@event;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Pages;
 using System.Text.RegularExpressions;
@@ -86,13 +85,6 @@ namespace SeleniumTest.EventsExpressTests
         {
             CheckElement(online);
         }
-        public void SetPosition()
-        {
-            Actions act = new Actions(driver);
-            IWebElement webElement = driver.FindElement(By.XPath("/html/body/div/div[3]/div/form/div[1]/div[11]/div/div"));
-            act.MoveToElement(webElement,30,30).Click();
-            act.Build().Perform();
-        }
         public void SetOnlinePath(string path)
         {
             SetInputField(onlinePath, path);
@@ -119,7 +111,6 @@ namespace SeleniumTest.EventsExpressTests
         }
         public string GetCategory()
         {
-            //return GetFieldValue(category);
             wait.Until(ExpectedConditions.ElementIsVisible(divCategory));
              IWebElement webElement = driver.FindElement(divCategory);
             var s = webElement.Text;
