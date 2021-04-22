@@ -23,6 +23,10 @@ namespace SeleniumTest.EventsExpressTests.Pages
         {
             return By.CssSelector(cssSelector);
         }
+        protected By Id(string cssSelector)
+        {
+            return By.Id(cssSelector);
+        }
         protected By Xpath(string xPath)
         {
             return By.XPath(xPath);
@@ -184,6 +188,21 @@ namespace SeleniumTest.EventsExpressTests.Pages
         {
             return wait.Until(ExpectedConditions.ElementIsVisible(by)).GetAttribute(attributeName);
         }
+        public bool HasClass(IWebElement el,string className)
+        {
 
+            return el.GetAttribute("class").Split(' ').Contains(className);
+        }
+        public bool HasStyle(IWebElement el, string styleName)
+        {
+
+            return el.GetAttribute("style").Split(' ').Contains(styleName);
+        }
+
+        public void MoveDown()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+        }
     }
 }

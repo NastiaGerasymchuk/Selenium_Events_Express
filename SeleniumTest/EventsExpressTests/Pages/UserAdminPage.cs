@@ -44,6 +44,19 @@ namespace SeleniumTest.EventsExpressTests
             Click(homeBtn);
             return this;
         }
+        public bool IsVisibleAddEvent()
+        {
+            try
+            {
+                IWebElement webElement = driver.FindElement(addEventBtn);
+
+                return webElement.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
     }
 }
 
