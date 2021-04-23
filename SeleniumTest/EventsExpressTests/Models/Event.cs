@@ -15,7 +15,10 @@ namespace SeleniumTest.EventsExpressTests.Models
         public string DateTo { get; set; }
         public string FullDate { get; set; }
         public string HeaderVisitor { get; set; }
+        public string Frequency { get; set; }
         public Protection Protection { get; set; }
-       
+        public int DaysFrom { get; set; }
+        public int DaysTo { get; set; }
+
     }
 }

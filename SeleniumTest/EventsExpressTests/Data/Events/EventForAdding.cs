@@ -13,7 +13,10 @@ namespace SeleniumTest.EventsExpressTests.Data.Events
             Description = "some new description",
             OnlineTitle = "Online meeting here",
             OnlinePath = "https://www.w3.org/TR/CSS21/selector.html%23id-selectors",
-            Category = "Golf"
+            Category = "Golf",
+            Frequency = "6",
+            DaysFrom = 3,
+            DaysTo = 8,
 
         };
         private string email = "admin@gmail.com";

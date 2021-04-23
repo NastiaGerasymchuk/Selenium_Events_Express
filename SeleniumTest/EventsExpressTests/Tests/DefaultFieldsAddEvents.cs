@@ -7,6 +7,7 @@ using System;
 using System.Globalization;
 using SeleniumTest.EventsExpressTests.Data.AddEvent;
 using SeleniumTest.EventsExpressTests.Data;
+using System.Threading;
 
 namespace SeleniumTest
 {
@@ -139,6 +140,186 @@ namespace SeleniumTest
             addEvent.SetOnlinePath(onlinePath);
             addEvent.SetPublicEvent();
             addEvent.Save();
+            Assert.That(addEvent.IsEventCreated, Is.True);
+            var homePage = res.HomeBtnClick();
+            Assert.That(addEvent.GetEventCount(), Is.EqualTo(eventCount));
+            Assert.IsTrue(homePage.GetType() == typeof(UserAdminPage));
+
+        }
+
+        
+        [TestCaseSource(typeof(EventForAdding))]
+        public void AddDayEvent(Event eventForAdding, string email, string password, int eventOrder, string photoPath)
+        {
+
+            string title = eventForAdding.Title;
+            string onlinePath = eventForAdding.OnlinePath;
+            string categoryName = eventForAdding.Category;
+            string description = eventForAdding.Description;
+            string frequency = eventForAdding.Frequency;
+            int daysFrom = eventForAdding.DaysFrom;
+            int eventCount = BaseData.EventsCount + 1;
+            HomeEvent home = GetHomeObject();
+            var registerPage = home.Registration();
+
+            registerPage.SetEmail(email);
+            registerPage.SetPassword(password);
+            UserAdminPage res = registerPage.LoginBtnClickValidData();
+            var addEvent = res.AddEventClick();
+            addEvent.UploadPhoto(photoPath);
+            addEvent.CropClick();
+            addEvent.SetTitle(title);
+            addEvent.SetDescription(description);
+            addEvent.SetCategory(categoryName);
+            //Assert.That(addEvent.IsNotFilledMapPosition, Is.True);
+            addEvent.SetOnlineEvent();
+            //Assert.That(addEvent.IsNotFilledOnlinePosition, Is.True);
+            addEvent.SetOnlinePath(onlinePath);
+            Assert.That(addEvent.IsPeriodicityVisible, Is.False);
+            Assert.That(addEvent.IsFrequencyVisible, Is.False);
+            addEvent.SetReccurentEvent();
+            Assert.That(addEvent.IsPeriodicityVisible, Is.True);
+            Assert.That(addEvent.IsFrequencyVisible, Is.True);
+            addEvent.ChooseDailyOption();
+            addEvent.SetFrequency(frequency);
+            addEvent.SetDateFrom(daysFrom);
+            addEvent.Save();
+            Thread.Sleep(BaseData.ThreadSleep);
+            Assert.That(addEvent.IsEventCreated, Is.True);
+            var homePage = res.HomeBtnClick();
+            Assert.That(addEvent.GetEventCount(), Is.EqualTo(eventCount));
+            Assert.IsTrue(homePage.GetType() == typeof(UserAdminPage));
+
+        }
+        [TestCaseSource(typeof(EventForAdding))]
+        public void AddWeekEvent(Event eventForAdding, string email, string password, int eventOrder, string photoPath)
+        {
+
+            string title = eventForAdding.Title;
+            string onlinePath = eventForAdding.OnlinePath;
+            string categoryName = eventForAdding.Category;
+            string description = eventForAdding.Description;
+            string frequency = eventForAdding.Frequency;
+            int daysFrom = eventForAdding.DaysFrom;
+            int daysTo = eventForAdding.DaysTo;
+            int eventCount = BaseData.EventsCount + 1;
+            HomeEvent home = GetHomeObject();
+            var registerPage = home.Registration();
+
+            registerPage.SetEmail(email);
+            registerPage.SetPassword(password);
+            UserAdminPage res = registerPage.LoginBtnClickValidData();
+            var addEvent = res.AddEventClick();
+            addEvent.UploadPhoto(photoPath);
+            addEvent.CropClick();
+            addEvent.SetTitle(title);
+            addEvent.SetDescription(description);
+            addEvent.SetCategory(categoryName);
+            //Assert.That(addEvent.IsNotFilledMapPosition, Is.True);
+            addEvent.SetOnlineEvent();
+            //Assert.That(addEvent.IsNotFilledOnlinePosition, Is.True);
+            addEvent.SetOnlinePath(onlinePath);
+            Assert.That(addEvent.IsPeriodicityVisible, Is.False);
+            Assert.That(addEvent.IsFrequencyVisible, Is.False);
+            addEvent.SetReccurentEvent();
+            Assert.That(addEvent.IsPeriodicityVisible, Is.True);
+            Assert.That(addEvent.IsFrequencyVisible, Is.True);
+            addEvent.ChooseWeeklyOption();
+            addEvent.SetFrequency(frequency);
+            addEvent.SetDateFrom(daysFrom);
+            addEvent.SetDateTo(daysTo);
+            addEvent.Save();
+            Thread.Sleep(BaseData.ThreadSleep);
+            Assert.That(addEvent.IsEventCreated, Is.True);
+            var homePage = res.HomeBtnClick();
+            Assert.That(addEvent.GetEventCount(), Is.EqualTo(eventCount));
+            Assert.IsTrue(homePage.GetType() == typeof(UserAdminPage));
+
+        }
+        [TestCaseSource(typeof(EventForAdding))]
+        public void AddMonthEvent(Event eventForAdding, string email, string password, int eventOrder, string photoPath)
+        {
+
+            string title = eventForAdding.Title;
+            string onlinePath = eventForAdding.OnlinePath;
+            string categoryName = eventForAdding.Category;
+            string description = eventForAdding.Description;
+            string frequency = eventForAdding.Frequency;
+            int daysFrom = eventForAdding.DaysFrom;
+            int daysTo = eventForAdding.DaysTo;
+            int eventCount = BaseData.EventsCount + 1;
+            HomeEvent home = GetHomeObject();
+            var registerPage = home.Registration();
+
+            registerPage.SetEmail(email);
+            registerPage.SetPassword(password);
+            UserAdminPage res = registerPage.LoginBtnClickValidData();
+            var addEvent = res.AddEventClick();
+            addEvent.UploadPhoto(photoPath);
+            addEvent.CropClick();
+            addEvent.SetTitle(title);
+            addEvent.SetDescription(description);
+            addEvent.SetCategory(categoryName);
+            //Assert.That(addEvent.IsNotFilledMapPosition, Is.True);
+            addEvent.SetOnlineEvent();
+            //Assert.That(addEvent.IsNotFilledOnlinePosition, Is.True);
+            addEvent.SetOnlinePath(onlinePath);
+            Assert.That(addEvent.IsPeriodicityVisible, Is.False);
+            Assert.That(addEvent.IsFrequencyVisible, Is.False);
+            addEvent.SetReccurentEvent();
+            Assert.That(addEvent.IsPeriodicityVisible, Is.True);
+            Assert.That(addEvent.IsFrequencyVisible, Is.True);
+            addEvent.ChooseMonthlyOption();
+            addEvent.SetFrequency(frequency);
+            addEvent.SetDateFrom(daysFrom);
+            addEvent.SetDateTo(daysTo);
+            addEvent.Save();
+            Thread.Sleep(BaseData.ThreadSleep);
+            Assert.That(addEvent.IsEventCreated, Is.True);
+            var homePage = res.HomeBtnClick();
+            Assert.That(addEvent.GetEventCount(), Is.EqualTo(eventCount));
+            Assert.IsTrue(homePage.GetType() == typeof(UserAdminPage));
+
+        }
+        [TestCaseSource(typeof(EventForAdding))]
+        public void AddYearlyEvent(Event eventForAdding, string email, string password, int eventOrder, string photoPath)
+        {
+
+            string title = eventForAdding.Title;
+            string onlinePath = eventForAdding.OnlinePath;
+            string categoryName = eventForAdding.Category;
+            string description = eventForAdding.Description;
+            string frequency = eventForAdding.Frequency;
+            int daysFrom = eventForAdding.DaysFrom;
+            int daysTo = eventForAdding.DaysTo;
+            int eventCount = BaseData.EventsCount + 1;
+            HomeEvent home = GetHomeObject();
+            var registerPage = home.Registration();
+
+            registerPage.SetEmail(email);
+            registerPage.SetPassword(password);
+            UserAdminPage res = registerPage.LoginBtnClickValidData();
+            var addEvent = res.AddEventClick();
+            addEvent.UploadPhoto(photoPath);
+            addEvent.CropClick();
+            addEvent.SetTitle(title);
+            addEvent.SetDescription(description);
+            addEvent.SetCategory(categoryName);
+            //Assert.That(addEvent.IsNotFilledMapPosition, Is.True);
+            addEvent.SetOnlineEvent();
+            //Assert.That(addEvent.IsNotFilledOnlinePosition, Is.True);
+            addEvent.SetOnlinePath(onlinePath);
+            Assert.That(addEvent.IsPeriodicityVisible, Is.False);
+            Assert.That(addEvent.IsFrequencyVisible, Is.False);
+            addEvent.SetReccurentEvent();
+            Assert.That(addEvent.IsPeriodicityVisible, Is.True);
+            Assert.That(addEvent.IsFrequencyVisible, Is.True);
+            addEvent.ChooseYearlyOption();
+            addEvent.SetFrequency(frequency);
+            addEvent.SetDateFrom(daysFrom);
+            addEvent.SetDateTo(daysTo);
+            addEvent.Save();
+            Thread.Sleep(BaseData.ThreadSleep);
             Assert.That(addEvent.IsEventCreated, Is.True);
             var homePage = res.HomeBtnClick();
             Assert.That(addEvent.GetEventCount(), Is.EqualTo(eventCount));

@@ -1,12 +1,15 @@
-﻿using java.awt;
+﻿using com.sun.org.apache.bcel.@internal.generic;
+using java.awt;
 using java.awt.datatransfer;
 using java.awt.@event;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Data;
+using SeleniumTest.EventsExpressTests.Enum;
 using SeleniumTest.EventsExpressTests.Pages;
 using System.Text.RegularExpressions;
 using System.Threading;
+
 
 namespace SeleniumTest.EventsExpressTests
 {
@@ -33,6 +36,9 @@ namespace SeleniumTest.EventsExpressTests
         private By mapPosition;
         private By eventCreateNotification;
         private By eventBlock;
+        private By periodicity;
+        private By frequency;
+        private By datefrom;
         private string cssDivPhoto = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div";
         private string cssBtnCrop = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div > div > div.controls > button";
         private string cssTitle = "#main > div > form > div.text.text-2.pl-md-4 > div:nth-child(2) > div > div > input";
@@ -47,13 +53,16 @@ namespace SeleniumTest.EventsExpressTests
         private string cssDescription = "#main > div > form > div.text.text-2.pl-md-4 > div:nth-child(7) > div > div > textarea";
         private string cssBtnSave = "#main > div > form > div.row.pl-md-4 > div:nth-child(1) > button";
         private string cssNotEmptyPhoto = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div > div > div.crop-container > div > div";
-        private string cssInputRecurent = "div:nth-child(1) > .MuiFormControlLabel-root > .MuiCheckbox-root .PrivateSwitchBase-input-119";
+        private string cssInputRecurent = "div:nth-child(2) > .MuiFormControlLabel-root .PrivateSwitchBase-input-119";
         private string cssMapInput = "#main > div > form > div.text.text-2.pl-md-4 > div.MuiFormControl-root > div > label:nth-child(1) > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-116.MuiRadio-root.MuiRadio-colorSecondary.PrivateSwitchBase-checked-117.Mui-checked.MuiIconButton-colorSecondary > span.MuiIconButton-label > input";
         private string cssCheckTypeEvent = "#main > div > form > div.text.text-2.pl-md-4 > div.MuiFormControl-root > div > label:nth-child(2) > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-116.MuiRadio-root.MuiRadio-colorSecondary.PrivateSwitchBase-checked-117.Mui-checked.MuiIconButton-colorSecondary > span.MuiIconButton-label > div";
         private string xpathCollapsedListInventories = "//*[@id='main']/div/form/div[1]/div[12]/div[2]";
         private string idMapPosition = "map";
         private string cssEventCreateNotification = "#root > div.MuiSnackbar-root.MuiSnackbar-anchorOriginBottomLeft";
         private string cssEventBlock = "#main > div.events-container > div > div.col-12";
+        private string idPeriodicity = "age-native-simple";
+        private string nameFrequelcy = "frequency";
+        private string cssDataFrom = "#main > div > form > div.text.text-2.pl-md-4 > div.meta-wrap.m-2 > span:nth-child(1) > div > div > input[type=text]";
         public AddEvent(IWebDriver driver):base(driver)
         {
             photoDiv = Css(cssDivPhoto);
@@ -77,6 +86,9 @@ namespace SeleniumTest.EventsExpressTests
             mapPosition = Id(idMapPosition);
             eventCreateNotification = Css(cssEventCreateNotification);
             eventBlock = Css(cssEventBlock);
+            periodicity = Id(idPeriodicity);
+            frequency = Name(nameFrequelcy);
+            datefrom = Css(cssDataFrom);
         }
         public bool IsPhotoVisible()
         {           
@@ -84,6 +96,33 @@ namespace SeleniumTest.EventsExpressTests
             {
              
                 IWebElement webElement = driver.FindElement(notEmptyPhoto);
+
+                return webElement.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+        public bool IsPeriodicityVisible()
+        {
+           return IsVisible(periodicity);
+        }
+        public bool IsFrequencyVisible()
+        {
+            return IsVisible(frequency);
+        }
+        public AddEvent SetFrequency(string count)
+        {
+            SetInputField(frequency, count);
+            return this;
+        }
+        public bool IsVisible(By by)
+        {
+            try
+            {
+
+                IWebElement webElement = driver.FindElement(by);
 
                 return webElement.Displayed;
             }
@@ -119,6 +158,10 @@ namespace SeleniumTest.EventsExpressTests
         public void SetPublicEvent()
         {
             CheckElement(inputPublicEvent);
+        }
+        public void SetReccurentEvent()
+        {
+            CheckElement(inputRecurentEvent);
         }
         public void SetOnlineEvent()
         {
@@ -254,11 +297,40 @@ namespace SeleniumTest.EventsExpressTests
         }
         public bool IsEventCreated()
         {
+            
            return IsVisible(eventCreateNotification);
         }
         public int GetEventCount()
         {
             return GetElementsCount(eventBlock);
+        }
+
+        public AddEvent ChooseDailyOption()
+        {
+            return SetPeriodicity(Periodicity.Daily);
+        }
+        public AddEvent ChooseWeeklyOption()
+        {
+            return SetPeriodicity(Periodicity.Weerly);
+        }
+        public AddEvent ChooseMonthlyOption()
+        {
+            return SetPeriodicity(Periodicity.Monthly);
+        }
+        public AddEvent ChooseYearlyOption()
+        {
+            return SetPeriodicity(Periodicity.Yearly);
+        }
+        public AddEvent SetPeriodicity(Periodicity period)
+        {
+            IWebElement webElement = driver.FindElement(By.Id(idPeriodicity));
+            Click(periodicity);
+            for(int i = 0; i < (int)period; i++)
+            {
+                webElement.SendKeys(Keys.ArrowDown);
+            }            
+            webElement.SendKeys(Keys.Enter);
+            return this;
         }
     }
 }
