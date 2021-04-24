@@ -296,13 +296,21 @@
     <Compile Include="EventsExpressTests\Pages\RegisterPage.cs" />
     <Compile Include="SignInOut.cs" />
     <Compile Include="EventsExpressTests\Tests\SingnInTest.cs" />
+    <Compile Include="StepDefinition\Day.cs" />
     <Compile Include="StepDefinition\DefaultValues.cs" />
+    <Compile Include="StepDefinition\Online.cs" />
+    <Compile Include="StepDefinition\Public.cs" />
+    <Compile Include="StepDefinition\Required.cs" />
     <Compile Include="StepDefinition\ToDoApp.cs" />
     <Compile Include="Type.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Feature\Day.feature" />
     <None Include="Feature\DefaultValues.feature" />
+    <None Include="Feature\Online.feature" />
+    <None Include="Feature\Public.feature" />
+    <None Include="Feature\Required.feature" />
     <None Include="Feature\ToDoApp.feature" />
     <None Include="packages.config" />
   </ItemGroup>
