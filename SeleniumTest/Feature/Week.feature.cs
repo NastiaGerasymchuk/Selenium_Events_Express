@@ -20,23 +20,23 @@ namespace SeleniumTest.Feature
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("CreatingEventWithRequiredFiles,Create event with required values")]
-    public partial class CreatingEventWithRequiredFilesCreateEventWithRequiredValuesFeature
+    [NUnit.Framework.DescriptionAttribute("Week")]
+    public partial class WeekFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Required.feature"
+#line 1 "Week.feature"
 #line hidden
         
         [NUnit.Framework.OneTimeSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Feature", "CreatingEventWithRequiredFiles,Create event with required values", "\tthis test gives oppotunity authorized system user to create event with minimum f" +
-                    "illing of fields", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Feature", "Week", "\tthis test gives oppotunity authorized system user to create week periodical even" +
+                    "t", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -74,40 +74,29 @@ namespace SeleniumTest.Feature
             testRunner.CollectScenarioErrors();
         }
         
-        public virtual void FeatureBackground()
-        {
-#line 4
-  #line hidden
-#line 5
-     testRunner.Given("unauthorised  user", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "email",
-                        "password"});
-            table1.AddRow(new string[] {
-                        "admin@gmail.com",
-                        "1qaz1qaz"});
-#line 6
-  testRunner.When("I   authorised   with", ((string)(null)), table1, "When ");
-#line hidden
-#line 10
-  testRunner.And("go   to add  event page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-        }
-        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Create event with required values")]
-        [NUnit.Framework.TestCaseAttribute("Desktop\\example.jpg", "add new event", "some new description", "Golf", null)]
-        public virtual void CreateEventWithRequiredValues(string photoPath, string title, string description, string category, string[] exampleTags)
+        [NUnit.Framework.DescriptionAttribute("Create week recurent event")]
+        [NUnit.Framework.CategoryAttribute("Week")]
+        [NUnit.Framework.TestCaseAttribute("Desktop\\example.jpg", "add new event", "some new description", "Golf", "6", "3", "8", null)]
+        public virtual void CreateWeekRecurentEvent(string photo, string title, string description, string category, string frequency, string dateFrom, string dateTo, string[] exampleTags)
         {
-            string[] tagsOfScenario = exampleTags;
+            string[] @__tags = new string[] {
+                    "Week"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            argumentsOfScenario.Add("photoPath", photoPath);
+            argumentsOfScenario.Add("photo", photo);
             argumentsOfScenario.Add("title", title);
             argumentsOfScenario.Add("description", description);
             argumentsOfScenario.Add("category", category);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create event with required values", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 11
+            argumentsOfScenario.Add("frequency", frequency);
+            argumentsOfScenario.Add("dateFrom", dateFrom);
+            argumentsOfScenario.Add("dateTo", dateTo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Create week recurent event", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 5
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -127,41 +116,48 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 4
-  this.FeatureBackground();
+#line 6
+testRunner.When(string.Format("I set value  of all requred fields({0}, {1},{2}, {3}, position on the map)", photo, title, description, category), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 7
+testRunner.Then("periodicity dropdown option and count of days aren\'t visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 8
+testRunner.And("choose  recurent event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 9
+testRunner.Then("periodicity dropdown option and count of days are visible", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 10
+testRunner.And("choose Weekly option", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+#line 11
+testRunner.And(string.Format("choose count of weeks {0}", frequency), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 12
-testRunner.When(string.Format("I set photo  field {0}", photoPath), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+testRunner.And(string.Format("choose date from  field {0}", dateFrom), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 13
- testRunner.And(string.Format("type  title field {0}", title), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And(string.Format("choose date to field {0}", dateTo), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 14
- testRunner.And(string.Format("type description field  {0}", description), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("click save  button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.And(string.Format("choose category field {0}", category), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.Then("event  will  be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 16
- testRunner.Then("map field ligths red", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.And("I am  redirected to home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 17
- testRunner.And("choose position on the map field", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+testRunner.And("I see created  event", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 18
- testRunner.Then("map doesn\'t ligth red", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("I create event, which will be from chosen from date from to chosen date to for ch" +
+                        "osen count of weeks", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 19
- testRunner.And("click save button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 20
- testRunner.Then("event will  be created", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 21
- testRunner.And("user is redirected to home page", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-#line 22
- testRunner.Then("quit  browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+testRunner.Then("quit    browser", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

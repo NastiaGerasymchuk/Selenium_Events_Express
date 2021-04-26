@@ -11,20 +11,20 @@ namespace SeleniumTest.EventsExpressTests.Tests
     public class BaseTest
     {
         protected  IWebDriver driver;
-        protected BaseData BaseData;
+        protected BaseConfigData BaseData;
         protected WebDriverWait wait;
         [SetUp]
         public virtual void SetUp()
         {
-            driver = new ChromeDriver(BaseData.ChromeDriver);
+            driver = new ChromeDriver(BaseConfigData.ChromeDriver);
             driver.Manage().Window.Maximize();
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(BaseData.SecondsWaintings));
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings));
         }
 
        
         private void GetScreen(string name)
         {
-            string path = BaseData.FallTestFolder;
+            string path = BaseConfigData.FallTestFolder;
             string fullPath = path + name;
             var screenshot = ((ITakesScreenshot)driver).GetScreenshot();
             screenshot.SaveAsFile(fullPath, ScreenshotImageFormat.Png);
@@ -32,7 +32,7 @@ namespace SeleniumTest.EventsExpressTests.Tests
         }
         protected HomeEvent GetHomeObject()
         {
-            driver.Navigate().GoToUrl(BaseData.Uri);
+            driver.Navigate().GoToUrl(BaseConfigData.Uri);
             return new HomeEvent(driver);
         }
 

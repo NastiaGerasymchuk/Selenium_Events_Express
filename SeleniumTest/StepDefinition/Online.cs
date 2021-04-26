@@ -100,7 +100,7 @@ namespace SeleniumTest.StepDefinition
         [Then(@"event   will be created")]
         public void ThenEventWillBeCreated()
         {
-            Thread.Sleep(BaseData.ThreadSleep);
+            Thread.Sleep(BaseConfigData.ThreadSleep);
             Assert.That(addEvent.IsEventCreated, Is.True);
         }
         

@@ -109,7 +109,7 @@ namespace SeleniumTest.StepDefinition
         [Then(@"event  will be created")]
         public void ThenEventWillBeCreated()
         {
-            Thread.Sleep(BaseData.ThreadSleep);
+            Thread.Sleep(BaseConfigData.ThreadSleep);
             Assert.That(addEvent.IsEventCreated, Is.True);
             
         }
@@ -124,7 +124,7 @@ namespace SeleniumTest.StepDefinition
         [Then(@"I  see created event")]
         public void ThenISeeCreatedEvent()
         {
-            int eventCount = BaseData.EventsCount + 1;
+            int eventCount = BaseConfigData.EventsCount + 1;
             Assert.That(addEvent.GetEventCount(), Is.EqualTo(eventCount));
             
         }

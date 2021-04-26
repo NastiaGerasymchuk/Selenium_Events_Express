@@ -245,8 +245,11 @@
   <ItemGroup>
     <Compile Include="EventsExpressTests\Data\AddEvent\DefaultFields.cs" />
     <Compile Include="EventsExpressTests\Data\BaseElementData.cs" />
+    <Compile Include="EventsExpressTests\Data\BaseInfoData.cs" />
+    <Compile Include="EventsExpressTests\Data\Events\AddRequiredEvent.cs" />
     <Compile Include="EventsExpressTests\Data\Events\EventForAdding.cs" />
     <Compile Include="EventsExpressTests\Enum\Periodicity.cs" />
+    <Compile Include="EventsExpressTests\Pages\SideBar.cs" />
     <Compile Include="EventsExpressTests\Tests\AddEventTest.cs" />
     <Compile Include="EventsExpressTests\Pages\AddEvent.cs" />
     <Compile Include="EventsExpressTests\Pages\AuthorInfo.cs" />
@@ -254,7 +257,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Driver.cs" />
     <Compile Include="EventSelenium.cs" />
-    <Compile Include="EventsExpressTests\Data\BaseData.cs" />
+    <Compile Include="EventsExpressTests\Data\BaseConfigData.cs" />
     <Compile Include="EventsExpressTests\Data\Events\EventsFilterDay.cs" />
     <Compile Include="EventsExpressTests\Data\Events\Events.cs" />
     <Compile Include="EventsExpressTests\Data\Events\EventsFilterCategory.cs" />
@@ -273,7 +276,7 @@
     <Compile Include="EventsExpressTests\FilterByLocation.cs" />
     <Compile Include="EventsExpressTests\FilterByLocationTest.cs" />
     <Compile Include="EventsExpressTests\Helpers\SelectionElements.cs" />
-    <Compile Include="EventsExpressTests\Tests\DefaultFieldsAddEvents.cs" />
+    <Compile Include="EventsExpressTests\Tests\AddEvents.cs" />
     <Compile Include="EventsExpressTests\Tests\HomeButtonTest.cs" />
     <Compile Include="EventsExpressTests\Pages\BaseClass.cs" />
     <Compile Include="EventsExpressTests\Tests\LogInTest.cs" />
@@ -298,6 +301,7 @@
     <Compile Include="EventsExpressTests\Tests\SingnInTest.cs" />
     <Compile Include="StepDefinition\Day.cs" />
     <Compile Include="StepDefinition\DefaultValues.cs" />
+    <Compile Include="StepDefinition\ExSteps.cs" />
     <Compile Include="StepDefinition\Online.cs" />
     <Compile Include="StepDefinition\Public.cs" />
     <Compile Include="StepDefinition\Required.cs" />
@@ -311,7 +315,7 @@
     <None Include="Feature\Online.feature" />
     <None Include="Feature\Public.feature" />
     <None Include="Feature\Required.feature" />
-    <None Include="Feature\ToDoApp.feature" />
+    <None Include="Feature\Week.feature" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

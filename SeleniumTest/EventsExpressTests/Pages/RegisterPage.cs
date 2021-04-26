@@ -52,7 +52,6 @@ namespace SeleniumTest
             SetInputField(emailInput, email);
             SetInputField(passwordInput, password);
             Click(loginBtn);
-
         }
 
         public RegisterPage InValidLogin(string email, string passsword)

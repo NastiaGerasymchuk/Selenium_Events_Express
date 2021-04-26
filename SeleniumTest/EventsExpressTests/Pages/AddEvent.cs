@@ -7,6 +7,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Data;
 using SeleniumTest.EventsExpressTests.Enum;
 using SeleniumTest.EventsExpressTests.Pages;
+using System;
 using System.Text.RegularExpressions;
 using System.Threading;
 
@@ -39,11 +40,13 @@ namespace SeleniumTest.EventsExpressTests
         private By periodicity;
         private By frequency;
         private By datefrom;
+        private By addedPhoto;
         private string cssDivPhoto = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div";
         private string cssBtnCrop = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div > div > div.controls > button";
         private string cssTitle = "#main > div > form > div.text.text-2.pl-md-4 > div:nth-child(2) > div > div > input";
         private string cssMaxPart = "#main > div > form > div.text.text-2.pl-md-4 > div:nth-child(3) > div > div > input";
-        private string xPathPublicEvent = "/html/body/div/div[3]/div/form/div[1]/div[5]/div/label/span[1]/span[1]/input";       
+        private string xPathPublicEvent = "//*[@id='main']/div/form/div[1]/div[5]/div/label/span[1]"; 
+        
         private string xPathOnline = "/html/body/div/div[3]/div/form/div[1]/div[10]/div/label[2]/span[1]/span[1]/input";
         private string cssOnlinePath = "#main > div > form > div.text.text-2.pl-md-4 > div:nth-child(11) > div > div > input";
         private string cssDateFrom = "#main > div > form > div.text.text-2.pl-md-4 > div.meta-wrap.m-2 > span > div > div > input[type=text]";
@@ -53,7 +56,7 @@ namespace SeleniumTest.EventsExpressTests
         private string cssDescription = "#main > div > form > div.text.text-2.pl-md-4 > div:nth-child(7) > div > div > textarea";
         private string cssBtnSave = "#main > div > form > div.row.pl-md-4 > div:nth-child(1) > button";
         private string cssNotEmptyPhoto = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div > div > div.crop-container > div > div";
-        private string cssInputRecurent = "div:nth-child(2) > .MuiFormControlLabel-root .PrivateSwitchBase-input-119";
+        private string xPathInputRecurent = "//*[@id='main']/div/form/div[1]/div[4]/div/label/span[1]/span[1]/input";
         private string cssMapInput = "#main > div > form > div.text.text-2.pl-md-4 > div.MuiFormControl-root > div > label:nth-child(1) > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-116.MuiRadio-root.MuiRadio-colorSecondary.PrivateSwitchBase-checked-117.Mui-checked.MuiIconButton-colorSecondary > span.MuiIconButton-label > input";
         private string cssCheckTypeEvent = "#main > div > form > div.text.text-2.pl-md-4 > div.MuiFormControl-root > div > label:nth-child(2) > span.MuiButtonBase-root.MuiIconButton-root.PrivateSwitchBase-root-116.MuiRadio-root.MuiRadio-colorSecondary.PrivateSwitchBase-checked-117.Mui-checked.MuiIconButton-colorSecondary > span.MuiIconButton-label > div";
         private string xpathCollapsedListInventories = "//*[@id='main']/div/form/div[1]/div[12]/div[2]";
@@ -63,6 +66,7 @@ namespace SeleniumTest.EventsExpressTests
         private string idPeriodicity = "age-native-simple";
         private string nameFrequelcy = "frequency";
         private string cssDataFrom = "#main > div > form > div.text.text-2.pl-md-4 > div.meta-wrap.m-2 > span:nth-child(1) > div > div > input[type=text]";
+        private string cssAddedPhoto = "#main > div > form > div.text.text-2.pl-md-4 > div.preview-container.valid > div > div > div > img";
         public AddEvent(IWebDriver driver):base(driver)
         {
             photoDiv = Css(cssDivPhoto);
@@ -70,7 +74,7 @@ namespace SeleniumTest.EventsExpressTests
             title = Css(cssTitle);
             maxParticipants = Css(cssMaxPart);
             inputPublicEvent = Xpath(xPathPublicEvent);
-            inputRecurentEvent = Css(cssInputRecurent);
+            inputRecurentEvent = Xpath(xPathInputRecurent);
             online = Xpath(xPathOnline);
             onlinePath = Css(cssOnlinePath);
             dateFrom = Css(cssDateFrom);
@@ -89,42 +93,61 @@ namespace SeleniumTest.EventsExpressTests
             periodicity = Id(idPeriodicity);
             frequency = Name(nameFrequelcy);
             datefrom = Css(cssDataFrom);
+            addedPhoto = Css(cssAddedPhoto);
         }
-        public bool IsPhotoVisible()
-        {           
-            try
-            {
-             
-                IWebElement webElement = driver.FindElement(notEmptyPhoto);
 
-                return webElement.Displayed;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
+        [Obsolete]
+        public bool IsPhotoVisible()
+        {
+            return Visible(notEmptyPhoto);      
+            //try
+            //{
+             
+            //    IWebElement webElement = driver.FindElement(notEmptyPhoto);
+
+            //    return webElement.Displayed;
+            //}
+            //catch (NoSuchElementException)
+            //{
+            //    return false;
+            //}
         }
+
+        [Obsolete]
+        public bool IsPresentAddedPhoto()
+        {
+            return Visible(addedPhoto);
+        }
+
+        [Obsolete]
         public bool IsPeriodicityVisible()
         {
-           return IsVisible(periodicity);
+            return Visible(periodicity);
+           
+
         }
+
+        [Obsolete]
         public bool IsFrequencyVisible()
         {
-            return IsVisible(frequency);
+            return Visible(frequency);
+            
         }
         public AddEvent SetFrequency(string count)
         {
             SetInputField(frequency, count);
             return this;
         }
-        public bool IsVisible(By by)
+
+        [Obsolete]
+        public bool Visible(By by)
         {
             try
             {
 
                 IWebElement webElement = driver.FindElement(by);
 
-                return webElement.Displayed;
+                return true;
             }
             catch (NoSuchElementException)
             {
@@ -285,7 +308,7 @@ namespace SeleniumTest.EventsExpressTests
         public AddEvent ChooseMapPosition()
         {
             Click(mapPosition);
-            return this;
+            return new AddEvent(driver);
         }
         public bool IsNotFilledMapPosition()
         {
@@ -295,10 +318,23 @@ namespace SeleniumTest.EventsExpressTests
         {
             return HasClass(driver.FindElement(onlinePath), BaseElementData.requredDataClass);
         }
+
+        [System.Obsolete]
         public bool IsEventCreated()
         {
-            
-           return IsVisible(eventCreateNotification);
+            try
+            {
+
+                wait.Until(ExpectedConditions.ElementIsVisible(eventCreateNotification));
+
+                IWebElement webElement = driver.FindElement(eventCreateNotification);
+                return true;
+                //return webElement.Displayed;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
         }
         public int GetEventCount()
         {

@@ -1,4 +1,4 @@
-﻿Feature: Required
+﻿
 Feature: CreatingEventWithRequiredFiles,Create event with required values	
 	this test gives oppotunity authorized system user to create event with minimum filling of fields
 	 Background:
@@ -8,7 +8,7 @@ Feature: CreatingEventWithRequiredFiles,Create event with required values
 	 | email | password |
 	 |admin@gmail.com | 1qaz1qaz |
 	 And go   to add  event page
-Scenario: Create event with required values	
+Scenario Outline: Create event with required values	
 When I set photo  field <photoPath>  
 	And type  title field <title>  
 	And type description field  <description>
@@ -24,5 +24,3 @@ When I set photo  field <photoPath>
 	| photoPath            | title         | description          | category| 
 	| Desktop\\example.jpg | add new event | some new description | Golf     | 
 
-	
-	

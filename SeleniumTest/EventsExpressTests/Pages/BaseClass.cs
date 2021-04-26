@@ -3,6 +3,7 @@ using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Data;
 using SeleniumTest.EventsExpressTests.Helpers;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace SeleniumTest.EventsExpressTests.Pages
@@ -11,13 +12,14 @@ namespace SeleniumTest.EventsExpressTests.Pages
     {
         protected IWebDriver driver;
         protected WebDriverWait wait;
-        protected BaseData BaseData;
+        protected BaseConfigData BaseData;
 
         
         public BaseClass(IWebDriver driver)
         {
             this.driver = driver;
-            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(BaseData.SecondsWaintings));
+            //this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            wait = new WebDriverWait(driver, TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings));
         }
         protected By Css(string cssSelector)
         {
@@ -41,7 +43,7 @@ namespace SeleniumTest.EventsExpressTests.Pages
         }
         public HomeEvent GoToBeginPage()
         {
-            driver.Navigate().GoToUrl(BaseData.Uri);
+            driver.Navigate().GoToUrl(BaseConfigData.Uri);
             return new HomeEvent(driver);
         }
         protected bool EnabledElement(By by)
@@ -50,11 +52,15 @@ namespace SeleniumTest.EventsExpressTests.Pages
         }
         protected void CheckElement(By by)
         {
+             //wait.Until(ExpectedConditions.ElementToBeClickable(by)).Click();
             driver.FindElement(by).Click();
         }
+
+        [Obsolete]
         protected void Click(By by)
         {            
             wait.Until(ExpectedConditions.ElementToBeClickable(by)).Click();
+
         }
         public int GetElementsCount(By by)
         {
@@ -62,7 +68,18 @@ namespace SeleniumTest.EventsExpressTests.Pages
             var elementName = driver.FindElements(by);
             return elementName.Count();
         }
-       
+        public List<string> GetTextFromElements(By by)
+        {
+            //wait.Until(ExpectedConditions.ElementIsVisible(by));
+            List<string> textRes = new List<string>();
+            var elementName = driver.FindElements(by);
+            foreach(IWebElement webElement in elementName)
+            {
+                textRes.Add(webElement.Text);
+            }
+            return textRes;
+        }
+
         protected bool GetVisible(By by)
         {
             try
@@ -199,10 +216,25 @@ namespace SeleniumTest.EventsExpressTests.Pages
             return el.GetAttribute("style").Split(' ').Contains(styleName);
         }
 
-        public void MoveDown()
+        public bool MoveDown()
         {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
+           
+            return true;
         }
+        public bool MoveUp()
+        {
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("window.scrollTo(0, -document.body.scrollHeight)");
+            return true;
+        }
+        public void Refresh()
+        {
+            driver.Navigate().Refresh();
+        }
+
     }
 }

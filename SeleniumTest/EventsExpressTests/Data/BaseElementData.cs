@@ -13,5 +13,6 @@ namespace SeleniumTest.EventsExpressTests.Data
         public const string chooseMapPositionStyle = "outline: none";
         public const string listIsInCollapsed = "d-none";
         public const string requredDataClass = "Mui-error";
+        public const int MaxEventOnPage = 6;
     }
 }

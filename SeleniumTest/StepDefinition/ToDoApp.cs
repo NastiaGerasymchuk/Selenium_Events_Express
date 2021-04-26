@@ -25,7 +25,7 @@ namespace SeleniumTest.StepDefinition
         [Given(@"that I am on the LambdaTest Sample app")]
         public void GivenThatIAmOnTheLambdaTestSampleApp()
         {
-            driver = new ChromeDriver(BaseData.ChromeDriver);
+            driver = new ChromeDriver(BaseConfigData.ChromeDriver);
             driver.Url = test_url;
             driver.Manage().Window.Maximize();
             System.Threading.Thread.Sleep(2000);

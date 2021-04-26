@@ -1,7 +1,11 @@
 ﻿using OpenQA.Selenium;
 using SeleniumTest.EventsExpressTests;
+using SeleniumTest.EventsExpressTests.Data;
+using SeleniumTest.EventsExpressTests.Models;
 using SeleniumTest.EventsExpressTests.Pages;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace SeleniumTest
 {
@@ -27,6 +31,9 @@ namespace SeleniumTest
         private By divResultEvents;
         private By divSelect;
         private By selectSetting;
+        private By btnLast;
+        private By btnFirst;
+        private SideBar sideBar;
         private string cssRightSideBar = "#main > div.sidebar-filter";
         private string cssBtnSearch = "#main > div.sidebar-filter > form > div.d-flex > button:nth-child(2)";
         private string cssBtnReset = "#main > div.sidebar-filter > form > div.d-flex > button:nth-child(1)";
@@ -43,9 +50,12 @@ namespace SeleniumTest
         private string nameInputKeyword = "keyWord";
         private string cssBtnHome = "# root > div.left-sidebar-closed.left-sidebar > nav > ul > li > a";
         private string classDivResult = "h1";
-        private string cssDivResulEvents = "# main > div.events-container > div> div.col-12";
+        private string cssDivResulEvents = "#main > div.events-container > div> div.col-12";
         private string xPathDiveSelect = "/html/body/div[1]/div[3]/div[1]/form/div[4]/div/div[1]/div/ul/li/span";
         private string cssSelectSetting = "#rw_1_taglist > li > span";
+        private string cssLastBtn = "#main > div.events-container > ul > div > div > button:last-child";
+        private string cssFirstBtn = "#main > div.events-container > ul > div > div > button:nth-child(1)";
+        
         public HomeEvent(IWebDriver driver):base(driver)
         {
             rightSideBar = Css(cssRightSideBar);
@@ -67,13 +77,61 @@ namespace SeleniumTest
             divResultEvents = Css(cssDivResulEvents);
             divSelect = Xpath(xPathDiveSelect);
             selectSetting = Css(cssSelectSetting);
+            btnLast = Css(cssLastBtn);
+            btnFirst = Css(cssFirstBtn);
+            sideBar =new SideBar(driver);
 
+        }
+
+        [Obsolete]
+        public UserAdminPage Login(User user)
+        {             
+            RegisterPage registerPage = Registration();
+            registerPage.SetEmail(user.Email);
+            registerPage.SetPassword(user.Password);
+            return registerPage.LoginBtnClickValidData();
+            
         }
         [Obsolete]
         public HomeEvent ClickRightSideBar()
         {
             Click(rightSideBar);
             return this;
+        }
+        [Obsolete]
+        public HomeEvent ClickLastBtn()
+        {
+            Click(btnLast);
+            return this;
+        }
+        [Obsolete]
+        public HomeEvent ClickFirstBtn()
+        {
+            Click(btnFirst);
+            return this;
+        }
+
+        [Obsolete]
+        public int GetEventcountOnLastPage()
+        {
+            //HomeEvent res = new HomeEvent(driver);
+            //res.ClickHomeBtn();
+            //res.MoveDown();
+            try
+            {
+
+                IWebElement webElement = driver.FindElement(btnFirst);
+
+                this.ClickFirstBtn();
+                this.ClickLastBtn();
+                return this.GetEventsCount();
+            }
+            catch (NoSuchElementException)
+            {
+                return this.GetEventsCount();
+            }
+
+
         }
         [Obsolete]
         public int GetEventsCount()
@@ -233,7 +291,15 @@ namespace SeleniumTest
         {
             return IsVisible(btnSearch);
         }
-        
+        public int GetCountElementSideBar()
+        {
+            return sideBar.GetNavElCount();
+        }        
+        public bool IsHomeObject()
+        {
+           return sideBar.IsCurrentPage(BaseInfoData.HomeMenu);
+        }
+
     }
 }
 
