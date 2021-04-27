@@ -297,7 +297,7 @@ namespace SeleniumTest
         }        
         public bool IsHomeObject()
         {
-           return sideBar.IsCurrentPage(BaseInfoData.HomeMenu);
+           return sideBar.IsContainsPageItemsAsync(BaseInfoData.HomeMenu).Result;
         }
 
     }

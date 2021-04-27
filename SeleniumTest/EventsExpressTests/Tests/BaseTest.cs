@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Data;
+using SeleniumTest.EventsExpressTests.Helpers;
 using System;
 
 namespace SeleniumTest.EventsExpressTests.Tests
@@ -16,8 +17,9 @@ namespace SeleniumTest.EventsExpressTests.Tests
         [SetUp]
         public virtual void SetUp()
         {
-            driver = new ChromeDriver(BaseConfigData.ChromeDriver);
-            driver.Manage().Window.Maximize();
+            driver = BrowserConfig.GetDriver();
+            //driver = new ChromeDriver(BaseConfigData.ChromeDriver);
+            //driver.Manage().Window.Maximize();
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings));
         }
 
@@ -44,7 +46,8 @@ namespace SeleniumTest.EventsExpressTests.Tests
                 string testName = TestContext.CurrentContext.Test.Name;
                 GetScreen(testName);
             }
-            driver.Close();
+            //driver.Close();
+            driver.CloseDriver();
         }
 
 

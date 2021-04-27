@@ -19,7 +19,7 @@ namespace SeleniumTest
         {
             base.SetUp();
             homeEvent = GetHomeObject();
-            userAdminPage = homeEvent.Login(BaseInfoData.User);
+            userAdminPage = homeEvent.Login(BaseInfoData.Admin);
 
         }
         private void SetRequredFields(string photoPath,string title,string description,string categoryName, AddEvent addEvent)
@@ -126,12 +126,7 @@ namespace SeleniumTest
             Assert.That(Default(addEvent), Is.False);
 
         }
-        [Test]
-        public void ImpossibilityCreateEvent()
-        {            
-            var home = GetHomeObject();
-            Assert.That(home.IsHomeObject, Is.True);            
-        }
+        
 
         [TestCaseSource(typeof(AddRequiredEvent))]
         [Obsolete]
@@ -141,9 +136,7 @@ namespace SeleniumTest
             string title = eventForAdding.Title;
             string onlinePath = eventForAdding.OnlinePath;
             string categoryName = eventForAdding.Category;
-            string description = eventForAdding.Description;
-            Assert.That(userAdminPage.GetCountElementSideBar(), Is.EqualTo(8));
-            Console.WriteLine(userAdminPage.GetCountElementSideBar());
+            string description = eventForAdding.Description;          
             var addEvent = userAdminPage.AddEventClick();
             SetRequredFields(photoPath, title, description, categoryName, addEvent);
 
@@ -158,6 +151,7 @@ namespace SeleniumTest
 
         
         [TestCaseSource(typeof(AddRequiredEvent))]
+        [Obsolete]
         public void AddDayEvent(Event eventForAdding, string photoPath)
         {
             string title = eventForAdding.Title;
@@ -175,7 +169,6 @@ namespace SeleniumTest
 
             userAdminPage.MoveDown();
             eventPrevCount = GetPrevEvent(homeEvent);
-            Console.WriteLine(eventPrevCount);
 
             var addEvent = userAdminPage.AddEventClick();
             SetRequredFields(photoPath, title, description, categoryName, addEvent);
@@ -183,8 +176,8 @@ namespace SeleniumTest
             //Assert.That(addEvent.IsChoosenMapPosition, Is.False);
             var res = addEvent.ChooseMapPosition();
             //Assert.That(addEvent.IsChoosenMapPosition, Is.True);
-            Assert.That(res.IsPeriodicityVisible, Is.False);
-            Assert.That(res.IsFrequencyVisible, Is.False);
+            Assert.That(addEvent.IsPeriodicityVisible, Is.False);
+            Assert.That(addEvent.IsFrequencyVisible, Is.False);
             addEvent.SetReccurentEvent();
             Assert.That(addEvent.IsPeriodicityVisible, Is.True);
             Assert.That(addEvent.IsFrequencyVisible, Is.True);

@@ -33,7 +33,7 @@ namespace SeleniumTest.EventsExpressTests
         {
             base.SetUp();
         }
-
+        
         [Test]
         [Obsolete]
         public void LoadPage_BtnSearchBtnReset_EnabledFalseBeOnCurrentPage()

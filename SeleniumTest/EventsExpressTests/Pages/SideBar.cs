@@ -1,9 +1,11 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace SeleniumTest.EventsExpressTests.Pages
 {
@@ -25,18 +27,19 @@ namespace SeleniumTest.EventsExpressTests.Pages
         {
             return GetElementsCount(nav);
         }
+
+        [Obsolete]
         public List<string> GetNavElText()
         {
             return GetTextFromElements(nav);
         }
-        public bool IsCurrentPage(List<string> pageItems)
+
+        [Obsolete]
+        public async Task<bool> IsContainsPageItemsAsync(List<string> pageItems)
         {
             var res = GetNavElText();
-            var masterToken = res.Select(t => t.Trim()).ToList();
-
-            List<string> matching = masterToken.Intersect(pageItems).ToList();
-
-            return matching.Count == pageItems.Count;
+            var eq=  res.Select(t => t.Replace("0\r\n", "")).Select(t => t.Trim()).Intersect(pageItems).Count().Equals(pageItems.Count);
+            return await Task.FromResult(eq);
         }
     }
 }

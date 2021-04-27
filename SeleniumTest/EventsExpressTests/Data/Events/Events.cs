@@ -24,8 +24,8 @@ namespace SeleniumTest.EventsExpressTests.Data.Events
                                                   };
             private Event weekEvent = new Event
             {
-                Author = "User",
-                Title = "This is User's Week Event",
+                Author = "Admin",
+                Title = "This is Admin's Week Event",
                 Participants = "0/8",
                 Description = "Week event",
                 OnlineTitle = "Online meeting here",

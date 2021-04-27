@@ -123,7 +123,7 @@ namespace SeleniumTest.EventsExpressTests
         public bool IsPeriodicityVisible()
         {
             return Visible(periodicity);
-           
+            //return GetVisible(periodicity);
 
         }
 
@@ -131,7 +131,8 @@ namespace SeleniumTest.EventsExpressTests
         public bool IsFrequencyVisible()
         {
             return Visible(frequency);
-            
+            //return GetVisible(frequency);
+
         }
         public AddEvent SetFrequency(string count)
         {
@@ -144,7 +145,6 @@ namespace SeleniumTest.EventsExpressTests
         {
             try
             {
-
                 IWebElement webElement = driver.FindElement(by);
 
                 return true;

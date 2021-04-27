@@ -114,6 +114,21 @@ namespace SeleniumTest.EventsExpressTests
         {
             return sideBar.GetNavElCount();
         }
+
+        [Obsolete]
+        public bool IsUserPage()
+        {
+            Thread.Sleep(8000);
+            return sideBar.IsContainsPageItemsAsync(BaseInfoData.UserMenu).Result;
+        }
+
+        [Obsolete]
+        public bool IsAdminPage()
+        {
+            //Thread.Sleep(8000);
+            //this.Refresh();
+            return sideBar.IsContainsPageItemsAsync(BaseInfoData.AdminMenu).Result;
+        }
     }
 }
 

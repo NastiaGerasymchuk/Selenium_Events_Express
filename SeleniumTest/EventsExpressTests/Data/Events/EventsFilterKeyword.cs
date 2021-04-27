@@ -17,7 +17,7 @@ namespace SeleniumTest.EventsExpressTests.Data.Events
         }
         public IEnumerator GetEnumerator()
         {
-            yield return new object[] { "User", UserEventsCount };
+            yield return new object[] { "Admin", UserEventsCount };
             yield return new object[] { "Admin", AdminEventsCount };
             yield return new object[] { GetStringFromEnum(EventPeriod.Day), DayCount };
             yield return new object[] { GetStringFromEnum(EventPeriod.Week), WeekCount };

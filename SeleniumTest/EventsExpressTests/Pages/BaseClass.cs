@@ -1,10 +1,12 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using SeleniumTest.EventsExpressTests.Data;
 using SeleniumTest.EventsExpressTests.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace SeleniumTest.EventsExpressTests.Pages
 {
@@ -18,7 +20,7 @@ namespace SeleniumTest.EventsExpressTests.Pages
         public BaseClass(IWebDriver driver)
         {
             this.driver = driver;
-            //this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            //this.driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             wait = new WebDriverWait(driver, TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings));
         }
         protected By Css(string cssSelector)
@@ -68,16 +70,21 @@ namespace SeleniumTest.EventsExpressTests.Pages
             var elementName = driver.FindElements(by);
             return elementName.Count();
         }
+
+        [Obsolete]
         public List<string> GetTextFromElements(By by)
         {
-            //wait.Until(ExpectedConditions.ElementIsVisible(by));
-            List<string> textRes = new List<string>();
-            var elementName = driver.FindElements(by);
-            foreach(IWebElement webElement in elementName)
-            {
-                textRes.Add(webElement.Text);
-            }
-            return textRes;
+            return driver.FindElements(by).Select(item => item.Text).ToList();
+            ////wait.Until(ExpectedConditions.ElementIsVisible(by));
+
+            //List<string> textRes = new List<string>();
+            //var elementName = driver.FindElements(by).Select(item=>item.Text);
+            ////Thread.Sleep(200000);
+            //foreach (IWebElement webElement in elementName)
+            //{
+            //    textRes.Add(webElement.Text);
+            //}
+            //return textRes;
         }
 
         protected bool GetVisible(By by)
@@ -218,17 +225,26 @@ namespace SeleniumTest.EventsExpressTests.Pages
 
         public bool MoveDown()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            //IWebDriver driver = new ChromeDriver(BaseConfigData.ChromeDriver);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            IWebDriver driver= BrowserConfig.GetDriver();
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollTo(0, document.body.scrollHeight)");
-           
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            //driver.Close();
+            driver.CloseDriver();
             return true;
         }
         public bool MoveUp()
         {
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            //IWebDriver driver = new ChromeDriver(BaseConfigData.ChromeDriver);
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(BaseConfigData.SecondsWaintings);
+            IWebDriver driver = BrowserConfig.GetDriver();
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("window.scrollTo(0, -document.body.scrollHeight)");
+            //driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(0);
+            //driver.Close();
+            driver.CloseDriver();
             return true;
         }
         public void Refresh()
